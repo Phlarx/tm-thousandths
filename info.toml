@@ -1,0 +1,10 @@
+[meta]
+name = "Thousandths"
+author = "Phlarx"
+category = "Race"
+
+siteid = 0
+version = "0.0"
+
+[script]
+imports = [ ]
