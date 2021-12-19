@@ -3,7 +3,7 @@ name = "Thousandths"
 author = "Phlarx"
 category = "Race"
 
-siteid = 0
+siteid = 151
 version = "0.1"
 
 [game]
