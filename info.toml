@@ -4,7 +4,12 @@ author = "Phlarx"
 category = "Race"
 
 siteid = 0
-version = "0.0"
+version = "0.1"
+
+[game]
+# since this is for Turbo and MP4, max_version is just to catch the
+# *extremely* unlikely event of a game update
+max_version = "2020-01-01"
 
 [script]
-imports = [ ]
+imports = [ "Icons.as" ]
