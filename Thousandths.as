@@ -1,5 +1,11 @@
 [Setting name="Enabled"]
 bool enabled = true;
+
+#if MP4
+[Setting name="Force enable on servers" description="Most servers will already display thousandths; enabling this might duplicate the last digit"]
+bool serverOverride = false;
+#endif
+
 bool errored = false;
 
 uint64 ptr_template_fast = 0;
@@ -86,7 +92,7 @@ void enable() {
 	bytes_ms_conversion = Dev::Patch(ptr_ms_conversion, "90 90 90 90 90 45 2B D0 41 8B D2 48 8B 44 24 30 90 90 90");
 #endif
 	
-	print("Thousandths: patch applied");
+	trace("Thousandths: patch applied");
 }
 
 void disable() {
@@ -100,7 +106,7 @@ void disable() {
 	string bytes_template_slow = "";
 	string bytes_ms_conversion = "";
 	
-	print("Thousandths: patch removed");
+	trace("Thousandths: patch removed");
 }
 
 #if MP4
@@ -128,6 +134,11 @@ void Update(float dt) {
 		if(scriptPlayer is null
 			|| scriptPlayer.RaceState != CTrackManiaPlayer::ERaceState::Running) {
 			nextInGame = false;
+		}
+		auto serverInfo = GetApp().Network is null ? null : cast<CGameCtnNetServerInfo>(GetApp().Network.ServerInfo);
+		if(serverInfo !is null
+			&& serverInfo.ServerLogin.Length > 0) {
+			nextInGame = serverOverride;
 		}
 	}
 	
