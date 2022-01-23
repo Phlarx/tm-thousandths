@@ -109,7 +109,14 @@ void disable() {
 	trace("Thousandths: patch removed");
 }
 
-#if MP4
+
+#if TURBO
+void Update(float dt) {
+	if(!enabled) return;
+	
+	FixUI::Turbo();
+}
+#elif MP4
 /*
 This is ugly, but required, since MP4 menus add the extra digit on already.
 This would cause the last digit to be duplicated: 1:23.456 -> 1:23.4566
